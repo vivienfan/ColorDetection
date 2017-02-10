@@ -5,12 +5,8 @@ Created on Fri Feb 10 01:10:53 2017
 @author: shang
 """
 
-# Pyramid
-# Color detect
-
 import cv2
 import numpy as np
-#import matplotlib.pyplot as plt
 
 def Pyramid(img):
     height, width, channels = img.shape
@@ -58,17 +54,30 @@ def ColorDetect(thumbnail):
 
 
 def main():
-    img1 = cv2.imread('redball_1.jpg', cv2.IMREAD_COLOR)
+    img1 = cv2.imread('red_1.jpg', cv2.IMREAD_COLOR)
     thumbnail1 = Pyramid(img1)
     cv2.imwrite('thumbnail_1.jpg', thumbnail1)
-    height1, width1 = ColorDetect(thumbnail1)
-    print('thumbnail_1.jpg: height: ' + str(height1) + ' width: ' + str(width1))
+    row1, col1 = ColorDetect(thumbnail1)
+    print('thumbnail_1.jpg: row: ' + str(row1) + ' col: ' + str(col1))
+    thumbnail1[row1, col1] = (0, 0, 0)
+    cv2.imwrite('coordinates_1.jpg', thumbnail1)
 
-    img2 = cv2.imread('redball_2.jpg', cv2.IMREAD_COLOR)
+    img2 = cv2.imread('red_2.jpg', cv2.IMREAD_COLOR)
     thumbnail2 = Pyramid(img2)
     cv2.imwrite('thumbnail_2.jpg', thumbnail2)
-    height2, width2 = ColorDetect(thumbnail2)
-    print('thumbnail_2.jpg: height: ' + str(height2) + ' width: ' + str(width2))
+    row2, col2 = ColorDetect(thumbnail2)
+    print('thumbnail_2.jpg: row: ' + str(row2) + ' col: ' + str(col2))
+    thumbnail2[row2, col2] = (0, 0, 0)
+    cv2.imwrite('coordinates_2.jpg', thumbnail2)
+
+    img3 = cv2.imread('red_3.jpg', cv2.IMREAD_COLOR)
+    thumbnail3 = Pyramid(img3)
+    cv2.imwrite('thumbnail_3.jpg', thumbnail3)
+    row3, col3 = ColorDetect(thumbnail3)
+    print('thumbnail_3.jpg: row: ' + str(row3) + ' col: ' + str(col3))
+    thumbnail3[row3, col3] = (0, 0, 0)
+    cv2.imwrite('coordinates_3.jpg', thumbnail3)
+
     return
 
 
